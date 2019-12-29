@@ -24,15 +24,6 @@ class TagsController < ApplicationController
     end
   end
 
-  # PATCH/PUT /tags/1
-  def update
-    if @tag.update(tag_params)
-      render json: @tag
-    else
-      render json: @tag.errors, status: :unprocessable_entity
-    end
-  end
-
   # DELETE /tags/1
   def destroy
     @tag.destroy
@@ -42,6 +33,8 @@ class TagsController < ApplicationController
     # Use callbacks to share common setup or constraints between actions.
     def set_tag
       @tag = Tag.find(params[:id])
+    rescue ActiveRecord::RecordNotFound
+      head(:not_found)
     end
 
     # Only allow a trusted parameter "white list" through.
