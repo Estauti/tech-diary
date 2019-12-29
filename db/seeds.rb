@@ -5,3 +5,13 @@
 #
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
+puts 'Started Seeds'
+
+puts '-- Creating Tags'
+5.times do
+  Tag.create(name: FFaker::Lorem.word)
+end
+puts "-- Tags Created"
+puts ''
+
+puts 'Finished Seeds'
