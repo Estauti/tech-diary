@@ -36,8 +36,10 @@ RSpec.configure do |config|
   # Factory Bot
   config.include FactoryBot::Syntax::Methods
 
-  # Include Request Helpers
-  config.include RequestSupport
+  config.include Devise::Test::IntegrationHelpers, type: :request
+
+  # Include Support modules
+  config.include RequestSupport, type: :request
 
   # Remove this line if you're not using ActiveRecord or ActiveRecord fixtures
   config.fixture_path = "#{::Rails.root}/spec/fixtures"

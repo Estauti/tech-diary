@@ -1,6 +1,10 @@
 require 'rails_helper'
 
 RSpec.describe "Tags", type: :request do
+  before do
+    sign_in create(:user)
+  end
+
   describe "GET /tags" do
     it "returns success" do
       get tags_path
