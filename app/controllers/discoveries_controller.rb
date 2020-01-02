@@ -1,0 +1,45 @@
+class DiscoveriesController < ApplicationController
+  before_action :set_discovery, only: [:show, :destroy]
+
+  # GET /discoveries
+  def index
+    @discoveries = Discovery.all
+
+    render json: @discoveries
+  end
+
+  # GET /discoveries/1
+  def show
+    render json: @discovery
+  end
+
+  # POST /discoveries
+  def create
+    @discovery = Discovery.new(discovery_params)
+
+    if @discovery.save
+      render json: @discovery, status: :created
+    else
+      render json: @discovery.errors, status: :unprocessable_entity
+    end
+  end
+
+  # DELETE /discoveries/1
+  def destroy
+    @discovery.destroy
+  end
+
+  private
+    # Use callbacks to share common setup or constraints between actions.
+    def set_discovery
+      @discovery = Discovery.find(params[:id])
+
+    rescue ActiveRecord::RecordNotFound => e
+      render json: { error: e.message }, status: :not_found
+    end
+
+    # Only allow a trusted parameter "white list" through.
+    def discovery_params
+      params.require(:discovery).permit(:text, :user_id)
+    end
+end
