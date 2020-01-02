@@ -5,7 +5,9 @@ class DiscoveriesController < ApplicationController
   def index
     @discoveries = Discovery.all
 
-    render json: @discoveries
+    @discoveries = @discoveries.where(user_id: params[:user_id]) if params[:user_id]
+
+    render json: @discoveries, status: :ok
   end
 
   # GET /discoveries/1

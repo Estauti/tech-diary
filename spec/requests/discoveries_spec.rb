@@ -2,14 +2,43 @@ require 'rails_helper'
 
 RSpec.describe "Discoveries", type: :request do
   describe "GET /discoveries" do
-    it "returns success" do
-      get discoveries_path
-      expect(response).to have_http_status(200)
+    describe 'without any filters' do
+      before do
+        get discoveries_path
+      end
+
+      it "returns success" do
+        expect(response).to have_http_status(200)
+      end
+  
+      it 'returns an array' do
+        expect(json_body).to be_an_instance_of(Array)
+      end
+  
+      it 'returns correct total of discoveries' do
+        expect(json_body.length).to eq(Discovery.count)
+      end
     end
 
-    it 'returns an array' do
-      get discoveries_path
-      expect(json_body).to be_an_instance_of(Array)
+    describe 'when filtering by author' do
+      let(:discoveries) { create_list(:discovery, 5) }
+      let(:author) { discoveries.first.author }
+
+      it 'returns success' do
+        get discoveries_path, params: {
+          user_id: author.id
+        }
+
+        expect(response).to have_http_status(200)
+      end
+
+      it 'returns the correct total of author discoveries' do
+        get discoveries_path, params: {
+          user_id: author.id
+        }
+
+        expect(json_body.length).to eq(author.discoveries.count)
+      end
     end
   end
 
