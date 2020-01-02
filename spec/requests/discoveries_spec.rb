@@ -1,6 +1,10 @@
 require 'rails_helper'
 
 RSpec.describe "Discoveries", type: :request do
+  before do
+    sign_in create(:user)  
+  end
+
   describe "GET /discoveries" do
     describe 'without any filters' do
       before do
@@ -66,14 +70,10 @@ RSpec.describe "Discoveries", type: :request do
 
   describe 'POST /discoveries' do
     let(:valid_attributes) do 
-      attributes_for(:discovery).merge({ 
-        user_id: create(:user).id
-      })
+      attributes_for(:discovery)
     end
     let(:invalid_attributes) do 
-      attributes_for(:discovery).merge({
-        user_id: nil
-      })
+      attributes_for(:discovery, text: nil)
     end
 
     it 'returns success' do

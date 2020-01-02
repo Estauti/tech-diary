@@ -1,5 +1,6 @@
 class DiscoveriesController < ApplicationController
   before_action :set_discovery, only: [:show, :destroy]
+  before_action :authenticate_user!
 
   # GET /discoveries
   def index
@@ -18,6 +19,7 @@ class DiscoveriesController < ApplicationController
   # POST /discoveries
   def create
     @discovery = Discovery.new(discovery_params)
+    @discovery[:user_id] = current_user.id
 
     if @discovery.save
       render json: @discovery, status: :created
