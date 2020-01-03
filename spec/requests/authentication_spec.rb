@@ -53,5 +53,15 @@ RSpec.describe 'Login', type: :request do
 end
 
 RSpec.describe 'Logout' do
-  pending 'logout with jwt token returns success'
+  let(:url) { '/logout' }
+
+  before do
+    sign_in create(:user)
+  end
+
+  it 'returns success' do
+    delete url
+
+    expect(response).to have_http_status(:no_content)
+  end
 end

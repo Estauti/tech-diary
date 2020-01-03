@@ -1,6 +1,10 @@
 require 'rails_helper'
 
 RSpec.describe "Users", type: :request do
+  before do
+    sign_in create(:user)  
+  end
+
   describe "GET /users" do
     before do
       get users_path
