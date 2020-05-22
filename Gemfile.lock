@@ -122,7 +122,7 @@ GEM
       mini_portile2 (~> 2.4.0)
     orm_adapter (0.5.0)
     pg (1.1.4)
-    puma (4.3.1)
+    puma (4.3.5)
       nio4r (~> 2.0)
     rack (2.0.8)
     rack-test (1.1.0)
@@ -217,7 +217,7 @@ DEPENDENCIES
   ffaker
   listen (>= 3.0.5, < 3.2)
   pg (~> 1.1)
-  puma (~> 4.1)
+  puma (~> 4.3)
   rails (~> 6.0.2)
   rspec-rails (~> 3.9)
   spring
